@@ -153,7 +153,6 @@ function nextMo() {
     displayCalendar(1);
 }
 
-/*                   2                   */
 function updateTotalCost() {
     var totalCost = 250000;
     var monthlyCost = totalCost / 60;

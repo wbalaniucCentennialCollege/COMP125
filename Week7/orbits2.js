@@ -173,8 +173,8 @@ function updateCountdown() {
        19, 0, 0); // all launches at 8:00pm UTC
 
     if ((dateTo - dateFrom) < 1000) { // time will be less than 0 when setInterval runs next 
-        clearInterval(countdown);
-        document.getElementById("countdownSection").style.display = "none";
+        clearInterval(countdown); // Clears timer set by setInterval()
+        document.getElementById("countdownSection").style.display = "none"; // Hides countdown section
     }
 
     // Calculates numbers of days, hours, minutes, seconds between start and end

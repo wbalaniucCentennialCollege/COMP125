@@ -66,6 +66,7 @@ function displayCalendar(whichMonth) {
     } else { // Apr, Jun, Sep, Nov
         daysInMonth = 30;
     }
+
     dateCells = document.getElementsByTagName("td");
 
     for (var i = 0; i < dateCells.length; i++) {
@@ -166,6 +167,8 @@ function createEventListeners() {
     } else if (closeButton.attachEvent) {
         closeButton.attachEvent("onclick", hideCalendar);
     }
+
+    // Navigate forward and backwards in the calendar
     var prevLink = document.getElementById("prev");
     var nextLink = document.getElementById("next");
     if (prevLink.addEventListener) {
