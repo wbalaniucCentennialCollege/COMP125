@@ -21,8 +21,6 @@ var ticket = {
         lName: ""
     }
 };
-*/
-/*
 var ticket = {
     passengers: {
         fName: "",
@@ -30,11 +28,13 @@ var ticket = {
     }
 };
 */
+
 var ticket = {
     passengersOnTicket: 0,
     passengers: {},  // Empty sub-object
     calcCost: updateTotalCost // Adding method
 }
+
 
 
 function displayCalendar(whichMonth) {
@@ -238,7 +238,6 @@ function registerName() {
     var passengerName = document.createElement("li");
     /*           4              */
 
-    
     var newFnameProp;
     var newLnameProp;
     ticket.passengersOnTicket += 1;
@@ -251,7 +250,7 @@ function registerName() {
 
     passengerName.innerHTML = ticket.passengers[newFnameProp] + " " + ticket.passengers[newLnameProp];
     passengerList.appendChild(passengerName);   // Appents passengerName to the passengerList element
-   
+  
 
     /*
     ticket.passengers.fName = document.getElementById("fname").value;  // Assigns fname field to the fName property of ticket

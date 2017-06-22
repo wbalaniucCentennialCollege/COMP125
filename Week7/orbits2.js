@@ -184,7 +184,7 @@ function updateCountdown() {
 
     //  hours
     var fractionalDay = (dateTo - dateFrom) % 86400000; // Returns number of days between both dates
-    var hoursUntil = Math.floor(fractionalDay / 3600000); // 3600000 is the number of microseconds in an hour
+    var hoursUntil = Math.floor(fractionalDay / 3600000); // 3600000 is the number of milliseconds in an hour
     if (hoursUntil < 10) {
         hoursUntil = "0" + hoursUntil;
     }
@@ -192,7 +192,7 @@ function updateCountdown() {
 
     // minutes
     var fractionalHour = fractionalDay % 3600000;
-    var minutesUntil = Math.floor(fractionalHour / 60000); // 60000 number of microseconds in a minute
+    var minutesUntil = Math.floor(fractionalHour / 60000); // 60000 number of milliseconds in a minute
     if (minutesUntil < 10) {
         minutesUntil = "0" + minutesUntil;
     }
@@ -201,7 +201,7 @@ function updateCountdown() {
 
     // seconds
     var fractionalMinute = fractionalHour % 60000;
-    var secondsUntil = Math.floor(fractionalMinute / 1000); // 1000 number of microseconds in a second
+    var secondsUntil = Math.floor(fractionalMinute / 1000); // 1000 milliseconds in a second
     if (secondsUntil < 10) {
         secondsUntil = "0" + secondsUntil;
     }
