@@ -22,7 +22,14 @@ function validateUsername() {
     var unInput = document.getElementById("uname");
     var errorDiv = document.getElementById("usernameError");
     try {
-        // replace with conditional expression
+        // if(unInput.value.length < 4) {
+        /* -----------3 */
+        if(/.{4,}/.test(unInput.value) === false) {
+            throw "Username must be at least 4 characters long";
+        } /*------------------4 */
+        else if (/\W/.test(unInput.value) === true) {
+            throw "Username must contain only letters and numbers";
+        }
 
         // remove any username error styling and message
         unInput.style.background = "";
@@ -51,7 +58,20 @@ function validatePassword() {
     var pw2Input = document.getElementById("pw2");
     var errorDiv = document.getElementById("passwordError");
     try {
-        // replace with conditional expression
+        // if (pw1Input.value.length < 8) {
+        /*-----------3 */
+        if(/.{8,}/.test(pw1Input.value) === false) {
+            throw "Password must be at least 8 characters";
+        } else if (pw1Input.value.localeCompare(pw2Input.value) !== 0) {
+            throw "Password must match";
+        } /*----------4 */
+        else if (/[a-zA-Z]/.test(pw1Input.value) === false) {   // Checks if pw1Input.value contains all lower and uppercase letters
+            throw "Password must contain at least one letter";
+        } else if (/\d/.test(pw1Input.value) === false) {       // Checks if pw1Input.value contains at least one number
+            throw "Password must contain at least one number";
+        } else if (/[!@#_]/.test(pw1Input.value) === false) {   // Checks if pw1Input.value any of the following symbols: ! @ # _
+            throw "Password must contain at least one of the following symbols: ! @ # _";
+        }
 
         // remove any password error styling and message
         pw1Input.style.background = "";
@@ -75,8 +95,46 @@ function validatePassword() {
 function validateEmail() {
     var emailInput = document.getElementById("emailbox");
     var errorDiv = document.getElementById("emailError");
+    /* ---------- 4 */
+    var emailCheck = /^[_\w\-]+(\.[_w\-]+)*@[\w\-]+(\.[\w\-]+)*(\.[\D]{2,6})$/;
     try {
-        // replace with conditional expression
+        /*
+            Note that /.../ denotes a regular expression. Below we replace emailInput.value.search("@") with emailInput.value.search(/@/).
+            This passes into the search function a regular expression rather than a string.
+
+            NOTE: You cannot use regular expressiong with indexOf and lastIndexOf
+        */
+
+        /*------------- 1         
+        if (emailInput.value.search(/@/) === -1 || emailInput.value.lastIndexOf(".") === -1) {
+            throw "Please provide a valid email address";
+        }
+        */
+
+        /*-----------------2
+        if (
+          (/@/.test(emailInput.value) === false) || (       // Check if the value of the emailInput element contains a @ symbol
+            (/\...$/.test(emailInput.value) === false) &&   // Checks whether the domain identifier contains 2 letters
+            (/\....$/.test(emailInput.value) === false) &&  // Checks whether the domain identifier contains 3 letters
+            (/\.....$/.test(emailInput.value) === false) && // Checks whether the domain identifier contains 4 letters
+            (/\.......$/.test(emailInput.value) === false)  // Checks whether the domain identifier contains 6 letters
+          )
+        ) {
+            throw "Please provide a valid email address";
+        }
+        */
+        /*---------------3
+        if ((/@/.test(emailInput.value) === false) || (/\..{2,6}$/.test(emailInput.value) === false)) {
+            throw "Please provide a valid email address";
+        }
+        */
+
+        /*------------- 4 */
+        if (emailCheck.test(emailInput.value) === false) {
+            throw "Please provide a valid email address";
+        }
+
+        emailInput.value = emailInput.value.toLowerCase();
 
         // remove any email error styling and message
         emailInput.style.background = "";

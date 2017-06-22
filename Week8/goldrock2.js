@@ -22,7 +22,11 @@ function validateUsername() {
     var unInput = document.getElementById("uname");
     var errorDiv = document.getElementById("usernameError");
     try {
-        // replace with conditional expression
+        //////////////////////////////////
+        if(unInput.value.length < 4) {
+            throw "Username must be at least 4 characters long";
+        }
+        //////////////////////////////////
 
         // remove any username error styling and message
         unInput.style.background = "";
@@ -51,7 +55,13 @@ function validatePassword() {
     var pw2Input = document.getElementById("pw2");
     var errorDiv = document.getElementById("passwordError");
     try {
-        // replace with conditional expression
+        //////////////////////////////
+        if (pw1Input.value.length < 8) {
+            throw "Password must be at least 8 characters";
+        } else if (pw1Input.value.localeCompare(pw2Input.value) !== 0) {
+            throw "Password must match";
+        }
+        ///////////////////////////////
 
         // remove any password error styling and message
         pw1Input.style.background = "";
@@ -76,7 +86,14 @@ function validateEmail() {
     var emailInput = document.getElementById("emailbox");
     var errorDiv = document.getElementById("emailError");
     try {
-        // replace with conditional expression
+
+        ///////////////////////////////////////
+        if (emailInput.value.search("@") === -1 || emailInput.value.lastIndexOf(".") === -1) {
+            throw "Please provide a valid email address";
+        }
+
+        emailInput.value = emailInput.value.toLowerCase();
+        ///////////////////////////////////////
 
         // remove any email error styling and message
         emailInput.style.background = "";

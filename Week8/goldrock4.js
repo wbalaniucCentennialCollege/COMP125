@@ -22,7 +22,12 @@ function validateUsername() {
     var unInput = document.getElementById("uname");
     var errorDiv = document.getElementById("usernameError");
     try {
-        // replace with conditional expression
+        if(/.{4,}/.test(unInput.value) === false) {
+            throw "Username must be at least 4 characters long";
+        } 
+        else if (/\W/.test(unInput.value) === true) {
+            throw "Username must contain only letters and numbers";
+        }
 
         // remove any username error styling and message
         unInput.style.background = "";
@@ -50,8 +55,18 @@ function validatePassword() {
     var pw1Input = document.getElementById("pw1");
     var pw2Input = document.getElementById("pw2");
     var errorDiv = document.getElementById("passwordError");
-    try {
-        // replace with conditional expression
+    try {/
+        if(/.{8,}/.test(pw1Input.value) === false) {
+            throw "Password must be at least 8 characters";
+        } else if (pw1Input.value.localeCompare(pw2Input.value) !== 0) {
+            throw "Password must match";
+        } else if (/[a-zA-Z]/.test(pw1Input.value) === false) {   // Checks if pw1Input.value contains all lower and uppercase letters
+            throw "Password must contain at least one letter";
+        } else if (/\d/.test(pw1Input.value) === false) {       // Checks if pw1Input.value contains at least one number
+            throw "Password must contain at least one number";
+        } else if (/[!@#_]/.test(pw1Input.value) === false) {   // Checks if pw1Input.value any of the following symbols: ! @ # _
+            throw "Password must contain at least one of the following symbols: ! @ # _";
+        }
 
         // remove any password error styling and message
         pw1Input.style.background = "";
@@ -75,8 +90,14 @@ function validatePassword() {
 function validateEmail() {
     var emailInput = document.getElementById("emailbox");
     var errorDiv = document.getElementById("emailError");
+    var emailCheck = /^[_\w\-]+(\.[_w\-]+)*@[\w\-]+(\.[\w\-]+)*(\.[\D]{2,6})$/;
     try {
-        // replace with conditional expression
+
+        if (emailCheck.test(emailInput.value) === false) {
+            throw "Please provide a valid email address";
+        }
+
+        emailInput.value = emailInput.value.toLowerCase();
 
         // remove any email error styling and message
         emailInput.style.background = "";
@@ -110,7 +131,9 @@ function registerLodging(event) {
     var callerElement = event.target || event.srcElement;
     var lodgingName = callerElement.value;
     if (callerElement.checked) { // if box has just been checked
-        // replace with statement to add checkbox value to lodging array
+        /* -------- 1   */
+        // add checkbox value to lodging array
+        lodging.push(lodgingName);  // Pushes the lodgingName value into the lodgine array (stack)
 
         // add checkbox value to list in profile section
         var newLodging = document.createElement("li");
@@ -123,7 +146,8 @@ function registerLodging(event) {
         var listItems = document.querySelectorAll("#profileLodgings li");
         for (var i = 0; i < listItems.length; i++) {
             if (listItems[i].innerHTML === lodgingName) {
-                // replace with statement to remove element at index i from array
+                // Remove element at index i from array
+                lodging.splice(i, 1);
 
                 // remove lodging from profile list
                 listItems[i].parentNode.removeChild(listItems[i]);
@@ -131,6 +155,15 @@ function registerLodging(event) {
             }
         }
     }
+}
+
+/* -------- 2 */
+// Convert form input to strings for submission
+function convertToString() {
+    // Convert lodging array to string
+    arrayString = lodging.toString();
+    /* ------------ 3 */
+    objectString = JSON.stringify(profile);
 }
 
 function createEventListeners() {
@@ -156,6 +189,14 @@ function createEventListeners() {
         for (var i = 0; i < lodgings.length; i++) {
             lodgings[i].attachEvent("onchange", registerLodging);
         }
+    }
+
+    /* ----------- 2 */
+    var button = document.getElementById("createBtn");
+    if(button.addEventListener) {
+        button.addEventListener("click", convertToString, false);
+    } else if (button.attachEvenet) {
+        button.attachEvent("onclick", convertToString);
     }
 }
 
