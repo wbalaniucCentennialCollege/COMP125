@@ -60,15 +60,6 @@ function getRequestObject() {
         httpRequest.abort(); // Cancels any existing HTTP request before beginning a new one.
         httpRequest.open("get", "solar.php?" + "lat=" + latitude + "&lng=" + longitude, true); // Opens new HTTP reques. Specifies GET as the method. Concats slar.php with latitude and longitude
         httpRequest.send(null); // Specifies request body as null
-
-        httpRequest.onreadystatechange = fillWeather;
-    }
-
-    function fillWeather() {
-        
-        if (httpRequest.readyState === 4 && httpRequest.status === 200) {
-            weatherReport = JSON.parse(httpRequest.responseText);
-        }
     }
 
     var locations = document.querySelectorAll("section ul li");

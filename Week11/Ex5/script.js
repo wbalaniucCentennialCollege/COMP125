@@ -15,22 +15,6 @@
 var selectedCity = "Tucson, AZ";
 var weatherReport;
 
-/**/ /* Instantiating an XMLHTTPRequest Object */
-var httpRequest = false; // Used to track whether an existing HTTP request is open to be reused
-
-function getRequestObject() {
-    try {
-        httpRequest = new XMLHttpRequest();
-    }
-    catch (requestError) {
-        document.querySelector("p.error").innerHTML = "Forecast not supported by your browser.";
-        document.querySelector("p.error").style.display = "block";
-        return false;
-    }
-
-    return httpRequest;
-}
-/**/
 
     function getWeather(evt) {
         var latitude;
@@ -52,14 +36,6 @@ function getRequestObject() {
             latitude = 45.5601062;
             longitude = -73.7120832;
         }
-
-        if (!httpRequest) {
-            httpRequest = getRequestObject();
-        }
-
-        httpRequest.abort(); // Cancels any existing HTTP request before beginning a new one.
-        httpRequest.open("get", "solar.php?" + "lat=" + latitude + "&lng=" + longitude, true); // Opens new HTTP reques. Specifies GET as the method. Concats slar.php with latitude and longitude
-        httpRequest.send(null); // Specifies request body as null
     }
 
     var locations = document.querySelectorAll("section ul li");
